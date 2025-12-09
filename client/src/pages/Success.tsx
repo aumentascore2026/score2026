@@ -1,8 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 export default function Success() {
-  const [videoUrl, setVideoUrl] = useState<string>('');
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Auto-play video when component mounts
@@ -12,15 +11,7 @@ export default function Success() {
         // Autoplay may be blocked, user can click to play
       });
     }
-  }, [videoUrl]);
-
-  const handleVideoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setVideoUrl(url);
-    }
-  };
+  }, []);
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -54,8 +45,23 @@ export default function Success() {
       {/* Main Content */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-8">
         <div className="w-full max-w-4xl mx-auto">
+          {/* Video Section - Top Priority */}
+          <div className="mb-12 animate-fade-in-up">
+            <div className="glass rounded-2xl p-2 md:p-4 border border-blue-400/30 overflow-hidden shadow-2xl" style={{ boxShadow: '0 0 30px rgba(59, 130, 246, 0.3)' }}>
+              <video
+                ref={videoRef}
+                src="/videos/guiascorereportagemJN.mp4"
+                controls
+                autoPlay
+                loop
+                className="w-full rounded-xl"
+                style={{ maxHeight: '600px', objectFit: 'contain', backgroundColor: '#000' }}
+              />
+            </div>
+          </div>
+
           {/* Main Title */}
-          <div className="text-center mb-12 animate-fade-in-up">
+          <div className="text-center mb-12 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
               PARABÉNS PELA ESCOLHA!
             </h1>
@@ -66,44 +72,6 @@ export default function Success() {
               COM APENAS 1 CLIQUE!!!
             </p>
           </div>
-
-          {/* Video Section */}
-          {videoUrl && (
-            <div className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-              <div className="glass rounded-2xl p-6 md:p-8 border border-blue-400/30 overflow-hidden">
-                <video
-                  ref={videoRef}
-                  src={videoUrl}
-                  controls
-                  autoPlay
-                  loop
-                  muted
-                  className="w-full rounded-lg"
-                  style={{ maxHeight: '500px', objectFit: 'contain' }}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Video Upload (for development) */}
-          {!videoUrl && (
-            <div className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-              <div className="glass rounded-2xl p-6 md:p-8 border border-blue-400/30 text-center">
-                <label className="cursor-pointer">
-                  <div className="py-12">
-                    <p className="text-blue-300 mb-4">Clique para enviar seu vídeo</p>
-                    <input
-                      type="file"
-                      accept="video/*"
-                      onChange={handleVideoUpload}
-                      className="hidden"
-                    />
-                    <div className="text-4xl">🎬</div>
-                  </div>
-                </label>
-              </div>
-            </div>
-          )}
 
           {/* Benefits Section */}
           <div className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
