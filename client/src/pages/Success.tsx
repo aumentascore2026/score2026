@@ -132,9 +132,14 @@ export default function Success() {
                 </p>
               </div>
 
-              <button className="w-full px-8 py-4 md:py-6 bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold text-lg md:text-2xl rounded-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 active:scale-95 glow-cyan">
+              <a
+                href="https://pay.frequenciaboa.shop/2wq7Gr7Den8gBAN"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-block px-8 py-4 md:py-6 bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold text-lg md:text-2xl rounded-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 active:scale-95 glow-cyan text-center"
+              >
                 Quero aumentar meu score HOJE!!!
-              </button>
+              </a>
 
               <p className="text-xl font-bold text-blue-300">
                 Seja feliz ainda hoje 🎊
