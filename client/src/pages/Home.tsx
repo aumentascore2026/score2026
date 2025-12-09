@@ -12,6 +12,20 @@ import SuccessModal from '@/components/SuccessModal';
  * Features: Animated thermometer, loading simulation, floating notifications, success modal
  */
 export default function Home() {
+  // Keep Render awake with periodic ping
+  useEffect(() => {
+    const pingInterval = setInterval(async () => {
+      try {
+        await fetch(window.location.origin + '/api/ping', { method: 'HEAD' }).catch(() => {
+          // Silently fail if endpoint doesn't exist
+        });
+      } catch (error) {
+        // Silently handle errors
+      }
+    }, 60000); // Ping every 60 seconds (1 minute)
+
+    return () => clearInterval(pingInterval);
+  }, []);
   const [cpf, setCpf] = useState('');
   const [score, setScore] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
