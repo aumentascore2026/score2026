@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'wouter';
 import { Zap } from 'lucide-react';
 import Thermometer from '@/components/Thermometer';
 import LoadingStatus from '@/components/LoadingStatus';
@@ -18,6 +19,7 @@ export default function Home() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [scoreIncrease, setScoreIncrease] = useState(0);
+  const [, setLocation] = useLocation();
 
   // Simulated user notifications
   const simulatedNotifications = [
@@ -114,7 +116,7 @@ export default function Home() {
       setIsLoading(false);
 
       // Show success modal
-      const increase = Math.floor(Math.random() * 400) + 200;
+      const increase = Math.floor(Math.random() * 450) + 500;
       setScoreIncrease(increase);
       setShowSuccessModal(true);
     }, 12000);
@@ -144,6 +146,11 @@ export default function Home() {
     setScore(0);
     setProgress(0);
     setShowSuccessModal(false);
+  };
+
+  // Navigate to success page
+  const handleGoToSuccess = () => {
+    setLocation('/success');
   };
 
   return (
@@ -227,7 +234,7 @@ export default function Home() {
                       disabled={isLoading || cpf.length < 11}
                       className="w-full px-6 py-3 bg-gradient-to-r from-blue-400 to-purple-500 text-white font-bold rounded-lg transition-all duration-300 hover:shadow-2xl hover:glow-cyan disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 glow-cyan"
                     >
-                      {isLoading ? 'Analisando...' : 'Veja se seu score pode subir com nossa I.A'}
+                      {isLoading ? 'Analisando...' : 'Aumentar Agora'}
                     </button>
 
                     {showSuccessModal && (
@@ -298,6 +305,7 @@ export default function Home() {
         isOpen={showSuccessModal}
         onClose={() => setShowSuccessModal(false)}
         scoreIncrease={scoreIncrease}
+        onProceed={handleGoToSuccess}
       />
     </div>
   );

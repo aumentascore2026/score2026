@@ -5,6 +5,7 @@ interface SuccessModalProps {
   isOpen: boolean;
   onClose: () => void;
   scoreIncrease: number;
+  onProceed?: () => void;
 }
 
 /**
@@ -12,7 +13,7 @@ interface SuccessModalProps {
  * Design: Futuristic glassmorphism with celebration effects
  * Displays success message after score simulation
  */
-export default function SuccessModal({ isOpen, onClose, scoreIncrease }: SuccessModalProps) {
+export default function SuccessModal({ isOpen, onClose, scoreIncrease, onProceed }: SuccessModalProps) {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
@@ -80,10 +81,10 @@ export default function SuccessModal({ isOpen, onClose, scoreIncrease }: Success
 
           {/* CTA Button */}
             <button
-            onClick={onClose}
+            onClick={onProceed || onClose}
             className="w-full mt-8 px-6 py-3 bg-gradient-to-r from-blue-400 to-purple-500 text-white font-bold rounded-lg transition-all duration-300 hover:shadow-2xl hover:glow-cyan active:scale-95 glow-cyan"
           >
-            Começar Agora
+            Aumentar Agora
           </button>
 
           {/* Close Button */}
