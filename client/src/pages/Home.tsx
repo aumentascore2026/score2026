@@ -164,10 +164,7 @@ export default function Home() {
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-8">
         <div className="w-full max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12 md:mb-16 animate-fade-in-up">
-            <div className="flex items-center justify-center mb-6">
-              <img src="/images/logo.png" alt="Aumente seu Score" className="h-32 md:h-40 object-contain" />
-            </div>
+          <div className="text-center mb-8 md:mb-12 animate-fade-in-up">
             <div className="flex items-center justify-center gap-4 mb-4">
               <img src="/images/logo.png" alt="" className="h-12 md:h-16 object-contain" />
               <h1 className="text-3xl md:text-5xl font-bold text-white glow-text-cyan">
