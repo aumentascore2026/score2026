@@ -5,6 +5,8 @@ import FloatingNotification, { Notification } from '@/components/FloatingNotific
 export default function Success() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [timeLeft, setTimeLeft] = useState(300); // 5 minutes in seconds
+  const [isExpired, setIsExpired] = useState(false);
 
   // Simulated user notifications
   const simulatedNotifications = [
@@ -20,6 +22,25 @@ export default function Success() {
     { name: 'Camila Rocha', scoreIncrease: 480 },
   ];
 
+  // Timer for promotional price
+  useEffect(() => {
+    if (timeLeft <= 0) {
+      setIsExpired(true);
+      // Reset timer after 3 seconds
+      const resetTimer = setTimeout(() => {
+        setTimeLeft(300);
+        setIsExpired(false);
+      }, 3000);
+      return () => clearTimeout(resetTimer);
+    }
+
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [timeLeft]);
+
   // Auto-play video when component mounts
   useEffect(() => {
     if (videoRef.current) {
@@ -28,6 +49,13 @@ export default function Success() {
       });
     }
   }, []);
+
+  // Format time for display
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
 
   // Generate random notifications (always active, slower and less frequent)
   useEffect(() => {
@@ -190,6 +218,25 @@ export default function Success() {
               >
                 Quero aumentar meu score HOJE!!!
               </a>
+
+              {/* Promotional Timer */}
+              <div className={`text-center py-4 px-6 rounded-lg transition-all duration-300 ${
+                isExpired 
+                  ? 'bg-red-500/20 border border-red-400/50' 
+                  : 'bg-green-500/20 border border-green-400/50'
+              }`}>
+                <p className="text-sm text-blue-200/80 mb-2">
+                  {isExpired ? '⏰ Promoção expirada! Reiniciando...' : '⏱️ Promoção válida por:'}
+                </p>
+                <p className={`text-3xl md:text-4xl font-bold font-mono ${
+                  isExpired ? 'text-red-400' : 'text-green-400'
+                }`}>
+                  {formatTime(timeLeft)}
+                </p>
+                <p className="text-xs text-blue-200/60 mt-2">
+                  {isExpired ? 'A promoção será reiniciada em breve' : 'Aproveite este preço especial!'}
+                </p>
+              </div>
 
               <p className="text-xl font-bold text-blue-300">
                 Seja feliz ainda hoje 🎊
