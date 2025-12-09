@@ -186,7 +186,8 @@ export default function Home() {
 
             {/* Right Column - Form and Status */}
             <div className="space-y-8 animate-slide-in-right">
-              {/* Form */}
+              {/* Form - Hidden when loading */}
+              {!isLoading && !showSuccessModal && (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="glass rounded-xl p-6 md:p-8 border border-blue-400/30 space-y-6">
                   <div>
@@ -224,6 +225,7 @@ export default function Home() {
                   </div>
                 </div>
               </form>
+              )}
 
               {/* Loading Status */}
               {isLoading && (
@@ -239,17 +241,17 @@ export default function Home() {
             {[
               {
                 title: 'Análise Completa',
-                description: 'Consultamos todas as instituições financeiras',
+                description: 'Fazemos uma varredura de todas suas dívidas nas instituições financeiras',
                 icon: '📊',
               },
               {
                 title: 'Resultado Instantâneo',
-                description: 'Receba seu score em segundos',
+                description: 'O seu score é aumentado em poucas horas.',
                 icon: '⚡',
               },
               {
                 title: 'Tecnologia Avançada',
-                description: 'I.A de última geração para análise precisa',
+                description: 'I.A de ultima geração faz todo o trabalho para aumentar seu score',
                 icon: '🤖',
               },
             ].map((item, index) => (
@@ -261,7 +263,7 @@ export default function Home() {
                   {item.icon}
                 </div>
                 <h3 className="text-lg font-semibold text-blue-300 mb-2">{item.title}</h3>
-                <p className="text-sm text-blue-200/60">{item.description}</p>
+                <p className="text-sm text-blue-200/60 leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>
