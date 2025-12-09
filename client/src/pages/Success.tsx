@@ -1,3 +1,4 @@
+// Force update - Kirvano checkout link updated
 import { useRef, useEffect, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import FloatingNotification, { Notification } from '@/components/FloatingNotification';
@@ -210,6 +211,7 @@ export default function Success() {
                 </p>
               </div>
 
+              {/* Checkout button - Kirvano payment link */}
               <a
                 href="https://pay.kirvano.com/34f3d6e9-4e35-450a-9ff1-1bfa4686ed74"
                 target="_blank"
