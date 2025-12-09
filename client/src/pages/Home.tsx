@@ -177,7 +177,6 @@ export default function Home() {
         {/* Header */}
         <div className="text-center mb-12 md:mb-16 animate-fade-in-down">
           <div className="flex items-center justify-center gap-4 mb-6">
-            <img src="/images/logo.png" alt="Logo" className="h-16 md:h-20 w-auto" />
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
               Aumente seu Score
             </h1>
