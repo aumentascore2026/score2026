@@ -41,6 +41,12 @@ export default function Home() {
     { name: 'Julia M.', scoreIncrease: 450 },
     { name: 'Ricardo Alves', scoreIncrease: 900 },
     { name: 'Ana Silva', scoreIncrease: 350 },
+    { name: 'Carlos Santos', scoreIncrease: 520 },
+    { name: 'Fernanda Costa', scoreIncrease: 380 },
+    { name: 'Bruno Oliveira', scoreIncrease: 650 },
+    { name: 'Patricia Gomes', scoreIncrease: 420 },
+    { name: 'Diego Martins', scoreIncrease: 750 },
+    { name: 'Camila Rocha', scoreIncrease: 480 },
   ];
 
   // Generate random notifications (always active, slower and less frequent)
@@ -60,13 +66,13 @@ export default function Home() {
         return updated.slice(-3); // Keep only last 3
       });
 
-      // Schedule next notification (every 8 seconds)
-      const nextTimer = setTimeout(addNotification, 8000);
+      // Schedule next notification (every 15 seconds)
+      const nextTimer = setTimeout(addNotification, 15000);
       timers.push(nextTimer);
     };
 
-    // Start first notification after 2 seconds
-    const initialTimer = setTimeout(addNotification, 2000);
+    // Start first notification after 3 seconds
+    const initialTimer = setTimeout(addNotification, 3000);
     timers.push(initialTimer);
 
     return () => timers.forEach((timer) => clearTimeout(timer));
