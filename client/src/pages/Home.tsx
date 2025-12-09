@@ -25,11 +25,9 @@ export default function Home() {
     { name: 'Julia M.', increase: 450 },
     { name: 'Ricardo Alves', increase: 900 },
     { name: 'Ana Silva', increase: 350 },
-    { name: 'Carlos Santos', increase: 550 },
-    { name: 'Beatriz Costa', increase: 700 },
   ];
 
-  // Generate random notifications (always active, not just during loading)
+  // Generate random notifications (always active, slower and less frequent)
   useEffect(() => {
     const notificationInterval = setInterval(() => {
       const randomUser = simulatedNotifications[
@@ -43,8 +41,14 @@ export default function Home() {
         timeAgo: 'agora',
       };
 
-      setNotifications((prev) => [...prev, newNotification]);
-    }, 3000);
+      setNotifications((prev) => {
+        // Limitar a máximo de 3 notificações visíveis
+        if (prev.length >= 3) {
+          return [...prev.slice(1), newNotification];
+        }
+        return [...prev, newNotification];
+      });
+    }, 8000); // Aumentado de 3000ms para 8000ms (8 segundos)
 
     return () => clearInterval(notificationInterval);
   }, []);
@@ -120,6 +124,19 @@ export default function Home() {
   const handleRemoveNotification = (id: string) => {
     setNotifications((prev) => prev.filter((n) => n.id !== id));
   };
+
+  // Auto-remove notifications after 5 seconds
+  useEffect(() => {
+    if (notifications.length === 0) return;
+
+    const timers = notifications.map((notification) =>
+      setTimeout(() => {
+        handleRemoveNotification(notification.id);
+      }, 5000)
+    );
+
+    return () => timers.forEach((timer) => clearTimeout(timer));
+  }, [notifications]);
 
   // Reset form
   const handleReset = () => {
