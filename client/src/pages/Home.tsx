@@ -207,11 +207,13 @@ export default function Home() {
                     <button
                       type="submit"
                       disabled={isLoading || cpf.length < 11}
-                      className={`w-full px-6 py-3 bg-gradient-to-r from-blue-400 to-purple-500 text-white font-bold rounded-lg transition-all duration-300 hover:shadow-2xl hover:glow-cyan disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 glow-cyan ${
-                        cpf.length === 0 && !isLoading ? 'animate-pulse' : ''
+                      className={`w-full px-6 py-3 bg-gradient-to-r from-blue-400 to-purple-500 text-white font-bold rounded-lg transition-all duration-300 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 relative overflow-hidden group ${
+                        cpf.length === 0 && !isLoading ? 'animate-button-glow' : 'hover:animate-button-glow'
                       }`}
                     >
-                      {isLoading ? 'Analisando...' : 'Aumentar Agora'}
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-300/0 via-blue-200/50 to-purple-300/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shine" />
+                      <span className="relative z-10">{isLoading ? 'Analisando...' : 'Aumentar Agora'}</span>
                     </button>
 
                     {showSuccessModal && (
@@ -286,6 +288,32 @@ export default function Home() {
 
       {/* CSS Animations */}
       <style>{`
+        @keyframes button-glow {
+          0%, 100% {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(139, 92, 246, 0.3);
+          }
+          50% {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 60px rgba(139, 92, 246, 0.5);
+          }
+        }
+
+        @keyframes shine {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+
+        .animate-button-glow {
+          animation: button-glow 2s ease-in-out infinite;
+        }
+
+        .animate-shine {
+          animation: shine 3s infinite;
+        }
+
         @keyframes fade-in-down {
           from {
             opacity: 0;
