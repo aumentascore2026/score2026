@@ -23,78 +23,59 @@ export default function Home() {
 
   // Simulated user notifications
   const simulatedNotifications = [
-    { name: 'Maria F.', increase: 400 },
-    { name: 'Julia M.', increase: 450 },
-    { name: 'Ricardo Alves', increase: 900 },
-    { name: 'Ana Silva', increase: 350 },
+    { name: 'Maria F.', scoreIncrease: 400 },
+    { name: 'Julia M.', scoreIncrease: 450 },
+    { name: 'Ricardo Alves', scoreIncrease: 900 },
+    { name: 'Ana Silva', scoreIncrease: 350 },
   ];
 
   // Generate random notifications (always active, slower and less frequent)
   useEffect(() => {
-    const notificationInterval = setInterval(() => {
-      const randomUser = simulatedNotifications[
-        Math.floor(Math.random() * simulatedNotifications.length)
-      ];
-      
+    const timers: NodeJS.Timeout[] = [];
+
+    const addNotification = () => {
+      const randomUser = simulatedNotifications[Math.floor(Math.random() * simulatedNotifications.length)];
       const newNotification: Notification = {
-        id: `${Date.now()}-${Math.random()}`,
+        id: Date.now().toString(),
         name: randomUser.name,
-        scoreIncrease: randomUser.increase,
-        timeAgo: 'agora',
+        scoreIncrease: randomUser.scoreIncrease,
       };
 
       setNotifications((prev) => {
-        // Limitar a máximo de 3 notificações visíveis
-        if (prev.length >= 3) {
-          return [...prev.slice(1), newNotification];
-        }
-        return [...prev, newNotification];
+        const updated = [...prev, newNotification];
+        return updated.slice(-3); // Keep only last 3
       });
-    }, 8000); // Aumentado de 3000ms para 8000ms (8 segundos)
 
-    return () => clearInterval(notificationInterval);
-  }, []);
+      // Schedule next notification (every 8 seconds)
+      const nextTimer = setTimeout(addNotification, 8000);
+      timers.push(nextTimer);
+    };
 
-  // Handle CPF input
-  const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, '').slice(0, 11);
-    setCpf(value);
-  };
+    // Start first notification after 2 seconds
+    const initialTimer = setTimeout(addNotification, 2000);
+    timers.push(initialTimer);
 
-  // Format CPF for display
-  const formatCpf = (value: string) => {
-    if (!value) return '';
-    return value
-      .replace(/\D/g, '')
-      .replace(/(\d{3})(\d)/, '$1.$2')
-      .replace(/(\d{3})(\d)/, '$1.$2')
-      .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-  };
+    return () => timers.forEach((timer) => clearTimeout(timer));
+  }, [notifications]);
 
-  // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (cpf.length < 11) return;
 
-    if (cpf.length < 11) {
-      alert('Por favor, digite um CPF válido');
-      return;
-    }
-
-    // Start simulation
     setIsLoading(true);
     setProgress(0);
     setScore(0);
 
-    // Simulate progress (slower)
+    // Simulate progress increase
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
-        if (prev >= 100) {
+        if (prev >= 95) {
           clearInterval(progressInterval);
-          return 100;
+          return 95;
         }
-        return prev + Math.random() * 10;
+        return prev + Math.random() * 15;
       });
-    }, 600);
+    }, 800);
 
     // Simulate score increase (slower)
     const scoreInterval = setInterval(() => {
@@ -127,19 +108,6 @@ export default function Home() {
     setNotifications((prev) => prev.filter((n) => n.id !== id));
   };
 
-  // Auto-remove notifications after 5 seconds
-  useEffect(() => {
-    if (notifications.length === 0) return;
-
-    const timers = notifications.map((notification) =>
-      setTimeout(() => {
-        handleRemoveNotification(notification.id);
-      }, 5000)
-    );
-
-    return () => timers.forEach((timer) => clearTimeout(timer));
-  }, [notifications]);
-
   // Reset form
   const handleReset = () => {
     setCpf('');
@@ -156,83 +124,92 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Animated Background Image */}
-        <div
-          className="absolute inset-0 opacity-40"
-          style={{
-            backgroundImage: 'url(/images/hero-background.png)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            animation: 'float 20s ease-in-out infinite',
-          }}
-        />
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" />
 
-        {/* Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-slate-900" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="0.5" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+          </svg>
+        </div>
 
-        {/* Animated Grid */}
-        <svg className="absolute inset-0 w-full h-full opacity-5" preserveAspectRatio="none">
-          <defs>
-            <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-              <path d="M 50 0 L 0 0 0 50" fill="none" stroke="currentColor" strokeWidth="0.5" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
+        {/* Diagonal Lines */}
+        <div className="absolute inset-0 opacity-5">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: 'linear-gradient(45deg, transparent 48%, rgba(59, 130, 246, 0.5) 49%, rgba(59, 130, 246, 0.5) 51%, transparent 52%)',
+              backgroundSize: '100px 100px',
+            }}
+          />
+        </div>
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-8">
-        <div className="w-full max-w-6xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-8 md:mb-12 animate-fade-in-up">
-            <div className="flex items-center justify-center gap-4 mb-4">
-              <img src="/images/logo.png" alt="" className="h-12 md:h-16 object-contain" />
-              <h1 className="text-3xl md:text-5xl font-bold text-white glow-text-cyan">
-                Aumente seu Score
-              </h1>
-              <img src="/images/logo.png" alt="" className="h-12 md:h-16 object-contain" />
-            </div>
-            <p className="text-base md:text-lg text-blue-300/80 font-light max-w-2xl mx-auto">
-              Aumente ainda hoje o seu score com a maior tecnologia avançada
-            </p>
+      <div className="relative z-10 container mx-auto px-4 py-12 md:py-16">
+        {/* Header */}
+        <div className="text-center mb-12 md:mb-16 animate-fade-in-down">
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <img src="/images/logo.png" alt="Logo" className="h-16 md:h-20 w-auto" />
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+              Aumente seu Score
+            </h1>
+            <img src="/images/logo.png" alt="Logo" className="h-16 md:h-20 w-auto" />
+          </div>
+          <p className="text-lg md:text-xl text-blue-300 max-w-2xl mx-auto">
+            Aumente ainda hoje o seu score com a maior tecnologia avançada
+          </p>
+        </div>
+
+        {/* Main Container */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          {/* Left Column - Thermometer */}
+          <div className="flex justify-center animate-slide-in-left">
+            <Thermometer score={score} isAnimating={isLoading} />
           </div>
 
-          {/* Main Container */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Left Column - Thermometer */}
-            <div className="flex justify-center animate-slide-in-left">
-              <Thermometer score={score} isAnimating={isLoading} />
-            </div>
-
-            {/* Right Column - Form and Status */}
-            <div className="space-y-8 animate-slide-in-right">
-              {/* Form - Hidden when loading */}
-              {!isLoading && !showSuccessModal && (
+          {/* Right Column - Form and Status */}
+          <div className="space-y-8 animate-slide-in-right">
+            {/* Form - Hidden when loading */}
+            {!isLoading && !showSuccessModal && (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="glass rounded-xl p-6 md:p-8 border border-blue-400/30 space-y-6">
-                  <div>
-                    <label className="block text-sm font-semibold text-blue-300 mb-3">
+                  <div className="space-y-2 group">
+                    <label className="text-sm font-semibold text-blue-300 group-focus-within:text-blue-200 transition-colors">
                       Digite seu CPF
                     </label>
-                    <input
-                      type="text"
-                      value={formatCpf(cpf)}
-                      onChange={handleCpfChange}
-                      placeholder="000.000.000-00"
-                      disabled={isLoading}
-                      className="w-full px-4 py-3 bg-slate-800/50 border border-blue-400/30 rounded-lg text-white placeholder-blue-400/40 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all duration-300 font-mono text-lg disabled:opacity-50"
-                    />
+                    <div className="relative">
+                      <input
+                        type="text"
+                        value={cpf}
+                        onChange={(e) => setCpf(e.target.value.replace(/\D/g, '').slice(0, 11))}
+                        placeholder="000.000.000-00"
+                        maxLength={11}
+                        disabled={isLoading}
+                        className="w-full px-4 py-3 bg-blue-900/30 border border-blue-400/50 rounded-lg text-blue-100 placeholder-blue-400/50 focus:outline-none focus:border-blue-300 focus:ring-2 focus:ring-blue-400/50 transition-all duration-300 disabled:opacity-50 group-focus-within:border-blue-200 group-focus-within:shadow-lg group-focus-within:shadow-blue-400/30"
+                      />
+                      {!isLoading && cpf.length === 0 && (
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 animate-pulse">
+                          <div className="text-2xl">👉</div>
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   <div className="space-y-3">
                     <button
                       type="submit"
                       disabled={isLoading || cpf.length < 11}
-                      className="w-full px-6 py-3 bg-gradient-to-r from-blue-400 to-purple-500 text-white font-bold rounded-lg transition-all duration-300 hover:shadow-2xl hover:glow-cyan disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 glow-cyan"
+                      className={`w-full px-6 py-3 bg-gradient-to-r from-blue-400 to-purple-500 text-white font-bold rounded-lg transition-all duration-300 hover:shadow-2xl hover:glow-cyan disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 glow-cyan ${
+                        cpf.length === 0 && !isLoading ? 'animate-pulse' : ''
+                      }`}
                     >
                       {isLoading ? 'Analisando...' : 'Aumentar Agora'}
                     </button>
@@ -249,48 +226,47 @@ export default function Home() {
                   </div>
                 </div>
               </form>
-              )}
+            )}
 
-              {/* Loading Status */}
-              {isLoading && (
-                <div className="animate-fade-in-up">
-                  <LoadingStatus isLoading={isLoading} progress={Math.min(progress, 100)} />
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Info Section */}
-          <div className="mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                title: 'Análise Completa',
-                description: 'Fazemos uma varredura de todas suas dívidas nas instituições financeiras',
-                icon: '📊',
-              },
-              {
-                title: 'Resultado Instantâneo',
-                description: 'O seu score é aumentado em poucas horas.',
-                icon: '⚡',
-              },
-              {
-                title: 'Tecnologia Avançada',
-                description: 'I.A de ultima geração faz todo o trabalho para aumentar seu score',
-                icon: '🤖',
-              },
-            ].map((item, index) => (
-                <div
-                key={index}
-                className="glass rounded-lg p-6 border border-blue-400/20 hover:border-blue-400/50 transition-all duration-300 group cursor-pointer"
-              >
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {item.icon}
-                </div>
-                <h3 className="text-lg font-semibold text-blue-300 mb-2">{item.title}</h3>
-                <p className="text-sm text-blue-200/60 leading-relaxed">{item.description}</p>
+            {/* Loading Status */}
+            {isLoading && (
+              <div className="animate-fade-in-up">
+                <LoadingStatus isLoading={isLoading} progress={Math.min(progress, 100)} />
               </div>
-            ))}
+            )}
           </div>
+        </div>
+
+        {/* Info Section */}
+        <div className="mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              title: 'Análise Completa',
+              description: 'Fazemos uma varredura de todas suas dívidas nas instituições financeiras',
+            },
+            {
+              title: 'Resultado Instantâneo',
+              description: 'O seu score é aumentado em poucas horas',
+            },
+            {
+              title: 'Tecnologia Avançada',
+              description: 'I.A de ultima geração faz todo o trabalho para aumentar seu score',
+            },
+          ].map((item, index) => (
+            <div
+              key={index}
+              className="glass rounded-xl p-6 border border-blue-400/30 text-center space-y-3 hover:border-blue-300 transition-all duration-300 animate-fade-in-up"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className="text-4xl">
+                {index === 0 && '🔍'}
+                {index === 1 && '⚡'}
+                {index === 2 && '🤖'}
+              </div>
+              <h3 className="text-lg font-semibold text-blue-300 mb-2">{item.title}</h3>
+              <p className="text-sm text-blue-200/60 leading-relaxed">{item.description}</p>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -307,6 +283,80 @@ export default function Home() {
         scoreIncrease={scoreIncrease}
         onProceed={handleGoToSuccess}
       />
+
+      {/* CSS Animations */}
+      <style>{`
+        @keyframes fade-in-down {
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes slide-in-left {
+          from {
+            opacity: 0;
+            transform: translateX(-30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes slide-in-right {
+          from {
+            opacity: 0;
+            transform: translateX(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in-down {
+          animation: fade-in-down 0.6s ease-out;
+        }
+
+        .animate-slide-in-left {
+          animation: slide-in-left 0.6s ease-out;
+        }
+
+        .animate-slide-in-right {
+          animation: slide-in-right 0.6s ease-out;
+        }
+
+        .animate-fade-in-up {
+          animation: fade-in-up 0.6s ease-out forwards;
+          opacity: 0;
+        }
+
+        .glass {
+          background: rgba(30, 41, 59, 0.7);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
+
+        .glow-cyan {
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+      `}</style>
     </div>
   );
 }

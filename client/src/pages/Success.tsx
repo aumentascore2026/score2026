@@ -1,8 +1,18 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import FloatingNotification, { Notification } from '@/components/FloatingNotification';
 
 export default function Success() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+
+  // Simulated user notifications
+  const simulatedNotifications = [
+    { name: 'Maria F.', scoreIncrease: 400 },
+    { name: 'Julia M.', scoreIncrease: 450 },
+    { name: 'Ricardo Alves', scoreIncrease: 900 },
+    { name: 'Ana Silva', scoreIncrease: 350 },
+  ];
 
   // Auto-play video when component mounts
   useEffect(() => {
@@ -12,6 +22,40 @@ export default function Success() {
       });
     }
   }, []);
+
+  // Generate random notifications (always active, slower and less frequent)
+  useEffect(() => {
+    const timers: NodeJS.Timeout[] = [];
+
+    const addNotification = () => {
+      const randomUser = simulatedNotifications[Math.floor(Math.random() * simulatedNotifications.length)];
+      const newNotification: Notification = {
+        id: Date.now().toString(),
+        name: randomUser.name,
+        scoreIncrease: randomUser.scoreIncrease,
+      };
+
+      setNotifications((prev) => {
+        const updated = [...prev, newNotification];
+        return updated.slice(-3); // Keep only last 3
+      });
+
+      // Schedule next notification (every 8 seconds)
+      const nextTimer = setTimeout(addNotification, 8000);
+      timers.push(nextTimer);
+    };
+
+    // Start first notification after 2 seconds
+    const initialTimer = setTimeout(addNotification, 2000);
+    timers.push(initialTimer);
+
+    return () => timers.forEach((timer) => clearTimeout(timer));
+  }, [notifications]);
+
+  // Remove notification
+  const handleRemoveNotification = (id: string) => {
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
+  };
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -153,6 +197,12 @@ export default function Success() {
           </div>
         </div>
       </div>
+
+      {/* Floating Notifications */}
+      <FloatingNotification
+        notifications={notifications}
+        onRemove={handleRemoveNotification}
+      />
 
       {/* CSS for animations */}
       <style>{`
