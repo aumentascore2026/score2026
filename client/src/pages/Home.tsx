@@ -63,7 +63,7 @@ export default function Home() {
 
       setNotifications((prev) => {
         const updated = [...prev, newNotification];
-        return updated.slice(-3); // Keep only last 3
+        return updated.slice(-2); // Keep only last 2
       });
 
       // Schedule next notification (every 15 seconds)
