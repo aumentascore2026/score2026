@@ -62,21 +62,17 @@ export default function Home() {
       };
 
       setNotifications((prev) => {
-        const updated = [...prev, newNotification];
-        // Keep ONLY 2 notifications maximum
-        if (updated.length > 2) {
-          return updated.slice(-2);
-        }
-        return updated;
+        // Keep ONLY 1 notification at a time
+        return [newNotification];
       });
 
-      // Schedule next notification (every 20 seconds)
-      const nextTimer = setTimeout(addNotification, 20000);
+      // Schedule next notification (every 25 seconds)
+      const nextTimer = setTimeout(addNotification, 25000);
       timers.push(nextTimer);
     };
 
-    // Start first notification after 5 seconds
-    const initialTimer = setTimeout(addNotification, 5000);
+    // Start first notification after 8 seconds
+    const initialTimer = setTimeout(addNotification, 8000);
     timers.push(initialTimer);
 
     return () => timers.forEach((timer) => clearTimeout(timer));
