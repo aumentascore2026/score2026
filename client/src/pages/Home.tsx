@@ -227,7 +227,7 @@ export default function Home() {
                       disabled={isLoading || cpf.length < 11}
                       className="w-full px-6 py-3 bg-gradient-to-r from-blue-400 to-purple-500 text-white font-bold rounded-lg transition-all duration-300 hover:shadow-2xl hover:glow-cyan disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 glow-cyan"
                     >
-                      {isLoading ? 'Analisando...' : 'Simular Score'}
+                      {isLoading ? 'Analisando...' : 'Veja se seu score pode subir com nossa I.A'}
                     </button>
 
                     {showSuccessModal && (
