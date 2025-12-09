@@ -33,7 +33,7 @@ export default function SuccessModal({ isOpen, onClose, scoreIncrease }: Success
       onClick={onClose}
     >
       <div
-        className={`glass rounded-2xl p-8 md:p-12 max-w-md w-full border border-cyan-400/50 shadow-2xl transform transition-all duration-500 ${
+        className={`glass rounded-2xl p-8 md:p-12 max-w-md w-full border border-blue-400/50 shadow-2xl transform transition-all duration-500 ${
           showContent
             ? 'scale-100 opacity-100'
             : 'scale-95 opacity-0'
@@ -42,9 +42,9 @@ export default function SuccessModal({ isOpen, onClose, scoreIncrease }: Success
       >
         {/* Celebration Background */}
         <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/5 to-green-500/10" />
-          <div className="absolute top-0 right-0 w-40 h-40 bg-green-400/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-40 h-40 bg-cyan-400/20 rounded-full blur-3xl" />
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-green-500/10" />
+          <div className="absolute top-0 right-0 w-40 h-40 bg-green-400/15 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-40 h-40 bg-blue-400/15 rounded-full blur-3xl" />
         </div>
 
         {/* Content */}
@@ -79,9 +79,9 @@ export default function SuccessModal({ isOpen, onClose, scoreIncrease }: Success
           </div>
 
           {/* CTA Button */}
-          <button
+            <button
             onClick={onClose}
-            className="w-full mt-8 px-6 py-3 bg-gradient-to-r from-cyan-400 to-purple-500 text-black font-bold rounded-lg transition-all duration-300 hover:shadow-2xl hover:glow-cyan active:scale-95 glow-cyan"
+            className="w-full mt-8 px-6 py-3 bg-gradient-to-r from-blue-400 to-purple-500 text-white font-bold rounded-lg transition-all duration-300 hover:shadow-2xl hover:glow-cyan active:scale-95 glow-cyan"
           >
             Começar Agora
           </button>
@@ -89,7 +89,7 @@ export default function SuccessModal({ isOpen, onClose, scoreIncrease }: Success
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="text-cyan-300/60 hover:text-cyan-300 text-sm transition-colors"
+            className="text-blue-300/60 hover:text-blue-300 text-sm transition-colors"
           >
             Fechar
           </button>

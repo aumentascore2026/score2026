@@ -60,7 +60,7 @@ function NotificationCard({ notification, index, onRemove }: NotificationCardPro
       }`}
       style={{
         animation: isVisible ? `slideInRight 0.4s ease-out 0.${index * 100}s both` : 'none',
-        background: 'rgba(0, 255, 136, 0.05)',
+        background: 'rgba(16, 185, 129, 0.08)',
       }}
     >
       <div className="flex items-start justify-between gap-3">
@@ -95,7 +95,7 @@ function NotificationCard({ notification, index, onRemove }: NotificationCardPro
 
       {/* Animated Border Glow */}
       <div className="absolute inset-0 rounded-lg pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-green-400/0 via-green-400/20 to-green-400/0 animate-pulse" />
+        <div className="absolute inset-0 bg-gradient-to-r from-green-400/0 via-green-400/10 to-green-400/0 animate-pulse" />
       </div>
     </div>
   );

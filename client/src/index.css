@@ -43,79 +43,75 @@
 }
 
 :root {
-  /* Futuristic Neon Theme */
-  --primary: #00d9ff;
-  --primary-foreground: #000000;
-  --secondary: #b000ff;
+  /* Modern Soft Theme - Improved Readability */
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #8b5cf6;
   --secondary-foreground: #ffffff;
-  --accent: #00ff88;
-  --accent-foreground: #000000;
-  --sidebar-primary: #00d9ff;
-  --sidebar-primary-foreground: #000000;
-  --chart-1: #00d9ff;
-  --chart-2: #b000ff;
-  --chart-3: #00ff88;
-  --chart-4: #ff006e;
-  --chart-5: #ffbe0b;
+  --accent: #10b981;
+  --accent-foreground: #ffffff;
+  --sidebar-primary: #3b82f6;
+  --sidebar-primary-foreground: #ffffff;
+  --chart-1: #3b82f6;
+  --chart-2: #8b5cf6;
+  --chart-3: #10b981;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
   --radius: 0.65rem;
-  --background: #0a0e27;
-  --foreground: #ffffff;
-  --card: rgba(20, 30, 60, 0.6);
-  --card-foreground: #ffffff;
-  --popover: rgba(20, 30, 60, 0.8);
-  --popover-foreground: #ffffff;
-  --secondary: #b000ff;
-  --secondary-foreground: #ffffff;
-  --muted: rgba(255, 255, 255, 0.2);
-  --muted-foreground: rgba(255, 255, 255, 0.6);
-  --accent: #00ff88;
-  --accent-foreground: #000000;
-  --destructive: #ff006e;
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+  --card: rgba(30, 41, 59, 0.7);
+  --card-foreground: #f1f5f9;
+  --popover: rgba(30, 41, 59, 0.9);
+  --popover-foreground: #f1f5f9;
+  --muted: rgba(148, 163, 184, 0.4);
+  --muted-foreground: rgba(148, 163, 184, 0.8);
+  --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: rgba(0, 217, 255, 0.2);
-  --input: rgba(20, 30, 60, 0.8);
-  --ring: #00d9ff;
-  --sidebar: rgba(10, 14, 39, 0.9);
-  --sidebar-foreground: #ffffff;
-  --sidebar-accent: rgba(0, 217, 255, 0.2);
-  --sidebar-accent-foreground: #00d9ff;
-  --sidebar-border: rgba(0, 217, 255, 0.1);
-  --sidebar-ring: #00d9ff;
+  --border: rgba(71, 85, 105, 0.3);
+  --input: rgba(30, 41, 59, 0.8);
+  --ring: #3b82f6;
+  --sidebar: rgba(15, 23, 42, 0.95);
+  --sidebar-foreground: #f1f5f9;
+  --sidebar-accent: rgba(59, 130, 246, 0.1);
+  --sidebar-accent-foreground: #3b82f6;
+  --sidebar-border: rgba(59, 130, 246, 0.2);
+  --sidebar-ring: #3b82f6;
 }
 
 .dark {
-  --primary: #00d9ff;
-  --primary-foreground: #000000;
-  --sidebar-primary: #00d9ff;
-  --sidebar-primary-foreground: #000000;
-  --background: #0a0e27;
-  --foreground: #ffffff;
-  --card: rgba(20, 30, 60, 0.6);
-  --card-foreground: #ffffff;
-  --popover: rgba(20, 30, 60, 0.8);
-  --popover-foreground: #ffffff;
-  --secondary: #b000ff;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --sidebar-primary: #3b82f6;
+  --sidebar-primary-foreground: #ffffff;
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+  --card: rgba(30, 41, 59, 0.7);
+  --card-foreground: #f1f5f9;
+  --popover: rgba(30, 41, 59, 0.9);
+  --popover-foreground: #f1f5f9;
+  --secondary: #8b5cf6;
   --secondary-foreground: #ffffff;
-  --muted: rgba(255, 255, 255, 0.2);
-  --muted-foreground: rgba(255, 255, 255, 0.6);
-  --accent: #00ff88;
-  --accent-foreground: #000000;
-  --destructive: #ff006e;
+  --muted: rgba(148, 163, 184, 0.4);
+  --muted-foreground: rgba(148, 163, 184, 0.8);
+  --accent: #10b981;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: rgba(0, 217, 255, 0.2);
-  --input: rgba(20, 30, 60, 0.8);
-  --ring: #00d9ff;
-  --chart-1: #00d9ff;
-  --chart-2: #b000ff;
-  --chart-3: #00ff88;
-  --chart-4: #ff006e;
-  --chart-5: #ffbe0b;
-  --sidebar: rgba(10, 14, 39, 0.9);
-  --sidebar-foreground: #ffffff;
-  --sidebar-accent: rgba(0, 217, 255, 0.2);
-  --sidebar-accent-foreground: #00d9ff;
-  --sidebar-border: rgba(0, 217, 255, 0.1);
-  --sidebar-ring: #00d9ff;
+  --border: rgba(71, 85, 105, 0.3);
+  --input: rgba(30, 41, 59, 0.8);
+  --ring: #3b82f6;
+  --chart-1: #3b82f6;
+  --chart-2: #8b5cf6;
+  --chart-3: #10b981;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
+  --sidebar: rgba(15, 23, 42, 0.95);
+  --sidebar-foreground: #f1f5f9;
+  --sidebar-accent: rgba(59, 130, 246, 0.1);
+  --sidebar-accent-foreground: #3b82f6;
+  --sidebar-border: rgba(59, 130, 246, 0.2);
+  --sidebar-ring: #3b82f6;
 }
 
 @layer base {
@@ -153,38 +149,38 @@
     min-width: 0;
   }
 
-  /* Neon Glow Effects */
+  /* Soft Glow Effects */
   .glow-cyan {
-    box-shadow: 0 0 20px rgba(0, 217, 255, 0.5), 0 0 40px rgba(0, 217, 255, 0.3);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3), 0 0 25px rgba(59, 130, 246, 0.15);
   }
 
   .glow-purple {
-    box-shadow: 0 0 20px rgba(176, 0, 255, 0.5), 0 0 40px rgba(176, 0, 255, 0.3);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3), 0 0 25px rgba(139, 92, 246, 0.15);
   }
 
   .glow-green {
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5), 0 0 40px rgba(0, 255, 136, 0.3);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.3), 0 0 25px rgba(16, 185, 129, 0.15);
   }
 
   .glow-text-cyan {
-    text-shadow: 0 0 10px rgba(0, 217, 255, 0.8), 0 0 20px rgba(0, 217, 255, 0.5);
+    text-shadow: 0 0 8px rgba(59, 130, 246, 0.4), 0 0 12px rgba(59, 130, 246, 0.2);
   }
 
   .glow-text-purple {
-    text-shadow: 0 0 10px rgba(176, 0, 255, 0.8), 0 0 20px rgba(176, 0, 255, 0.5);
+    text-shadow: 0 0 8px rgba(139, 92, 246, 0.4), 0 0 12px rgba(139, 92, 246, 0.2);
   }
 
   /* Glassmorphism Effect */
   .glass {
-    background: rgba(20, 30, 60, 0.4);
+    background: rgba(30, 41, 59, 0.5);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 217, 255, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.2);
   }
 
   .glass-dark {
-    background: rgba(10, 14, 39, 0.5);
+    background: rgba(15, 23, 42, 0.6);
     backdrop-filter: blur(15px);
-    border: 1px solid rgba(0, 217, 255, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.15);
   }
 
   /* Animations */
@@ -199,10 +195,10 @@
 
   @keyframes pulse-glow {
     0%, 100% {
-      box-shadow: 0 0 20px rgba(0, 217, 255, 0.5), 0 0 40px rgba(0, 217, 255, 0.3);
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.3), 0 0 25px rgba(59, 130, 246, 0.15);
     }
     50% {
-      box-shadow: 0 0 30px rgba(0, 217, 255, 0.8), 0 0 60px rgba(0, 217, 255, 0.5);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), 0 0 35px rgba(59, 130, 246, 0.2);
     }
   }
 

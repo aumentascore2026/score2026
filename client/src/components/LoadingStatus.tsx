@@ -42,12 +42,12 @@ export default function LoadingStatus({ isLoading, progress }: LoadingStatusProp
       {/* Progress Bar */}
       <div className="space-y-2">
         <div className="flex justify-between items-center">
-          <span className="text-sm font-mono text-cyan-300">Progresso</span>
-          <span className="text-sm font-mono text-cyan-400 glow-text-cyan">{progress}%</span>
+          <span className="text-sm font-mono text-blue-300">Progresso</span>
+          <span className="text-sm font-mono text-blue-400 glow-text-cyan">{progress}%</span>
         </div>
-        <div className="w-full h-2 glass rounded-full overflow-hidden border border-cyan-400/30">
+        <div className="w-full h-2 glass rounded-full overflow-hidden border border-blue-400/30">
           <div
-            className="h-full bg-gradient-to-r from-cyan-400 via-purple-500 to-cyan-400 transition-all duration-300 ease-out shadow-lg"
+            className="h-full bg-gradient-to-r from-blue-400 via-purple-500 to-blue-400 transition-all duration-300 ease-out shadow-lg"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -66,24 +66,24 @@ export default function LoadingStatus({ isLoading, progress }: LoadingStatusProp
                 isCompleted
                   ? 'border-green-400/50 bg-green-500/10'
                   : isActive
-                  ? 'border-cyan-400/50 bg-cyan-500/10'
-                  : 'border-cyan-400/20 bg-transparent opacity-40'
+                  ? 'border-blue-400/50 bg-blue-500/10'
+                  : 'border-blue-400/20 bg-transparent opacity-40'
               }`}
             >
               {isCompleted ? (
                 <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 glow-green" />
               ) : isActive ? (
-                <Loader2 className="w-5 h-5 text-cyan-400 flex-shrink-0 animate-spin glow-cyan" />
+                <Loader2 className="w-5 h-5 text-blue-400 flex-shrink-0 animate-spin glow-cyan" />
               ) : (
-                <div className="w-5 h-5 rounded-full border border-cyan-400/30" />
+                <div className="w-5 h-5 rounded-full border border-blue-400/30" />
               )}
               <span
                 className={`text-sm font-mono ${
                   isCompleted
                     ? 'text-green-300'
                     : isActive
-                    ? 'text-cyan-300 glow-text-cyan'
-                    : 'text-cyan-300/50'
+                    ? 'text-blue-300 glow-text-cyan'
+                    : 'text-blue-300/50'
                 }`}
               >
                 {step}

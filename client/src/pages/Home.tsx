@@ -133,7 +133,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-blue-950 to-slate-950 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Animated Background Image */}
@@ -148,8 +148,8 @@ export default function Home() {
         />
 
         {/* Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/50 to-slate-950" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-slate-900" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
 
         {/* Animated Grid */}
@@ -169,13 +169,13 @@ export default function Home() {
           {/* Header */}
           <div className="text-center mb-12 md:mb-16 animate-fade-in-up">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <Zap className="w-8 h-8 text-cyan-400 glow-cyan" />
+              <Zap className="w-8 h-8 text-blue-400 glow-cyan" />
               <h1 className="text-4xl md:text-6xl font-bold font-mono text-white glow-text-cyan">
                 SCORE 2026
               </h1>
-              <Zap className="w-8 h-8 text-cyan-400 glow-cyan" />
+              <Zap className="w-8 h-8 text-blue-400 glow-cyan" />
             </div>
-            <p className="text-lg md:text-xl text-cyan-300/80 font-light">
+            <p className="text-lg md:text-xl text-blue-300/80 font-light">
               Simulador de Score com Tecnologia Avançada
             </p>
           </div>
@@ -191,9 +191,9 @@ export default function Home() {
             <div className="space-y-8 animate-slide-in-right">
               {/* Form */}
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="glass rounded-xl p-6 md:p-8 border border-cyan-400/30 space-y-6">
+                <div className="glass rounded-xl p-6 md:p-8 border border-blue-400/30 space-y-6">
                   <div>
-                    <label className="block text-sm font-semibold text-cyan-300 mb-3">
+                    <label className="block text-sm font-semibold text-blue-300 mb-3">
                       Digite seu CPF
                     </label>
                     <input
@@ -202,7 +202,7 @@ export default function Home() {
                       onChange={handleCpfChange}
                       placeholder="000.000.000-00"
                       disabled={isLoading}
-                      className="w-full px-4 py-3 bg-slate-900/50 border border-cyan-400/30 rounded-lg text-white placeholder-cyan-400/40 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 font-mono text-lg disabled:opacity-50"
+                      className="w-full px-4 py-3 bg-slate-800/50 border border-blue-400/30 rounded-lg text-white placeholder-blue-400/40 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all duration-300 font-mono text-lg disabled:opacity-50"
                     />
                   </div>
 
@@ -210,7 +210,7 @@ export default function Home() {
                     <button
                       type="submit"
                       disabled={isLoading || cpf.length < 11}
-                      className="w-full px-6 py-3 bg-gradient-to-r from-cyan-400 to-purple-500 text-black font-bold rounded-lg transition-all duration-300 hover:shadow-2xl hover:glow-cyan disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 glow-cyan"
+                      className="w-full px-6 py-3 bg-gradient-to-r from-blue-400 to-purple-500 text-white font-bold rounded-lg transition-all duration-300 hover:shadow-2xl hover:glow-cyan disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 glow-cyan"
                     >
                       {isLoading ? 'Analisando...' : 'Simular Score'}
                     </button>
@@ -219,7 +219,7 @@ export default function Home() {
                       <button
                         type="button"
                         onClick={handleReset}
-                        className="w-full px-6 py-3 bg-slate-800/50 border border-cyan-400/30 text-cyan-300 font-semibold rounded-lg transition-all duration-300 hover:bg-slate-700/50 hover:border-cyan-400/50"
+                        className="w-full px-6 py-3 bg-slate-800/50 border border-blue-400/30 text-blue-300 font-semibold rounded-lg transition-all duration-300 hover:bg-slate-700/50 hover:border-blue-400/50"
                       >
                         Nova Simulação
                       </button>
@@ -256,15 +256,15 @@ export default function Home() {
                 icon: '🤖',
               },
             ].map((item, index) => (
-              <div
+                <div
                 key={index}
-                className="glass rounded-lg p-6 border border-cyan-400/20 hover:border-cyan-400/50 transition-all duration-300 group cursor-pointer"
+                className="glass rounded-lg p-6 border border-blue-400/20 hover:border-blue-400/50 transition-all duration-300 group cursor-pointer"
               >
                 <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
                   {item.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-cyan-300 mb-2">{item.title}</h3>
-                <p className="text-sm text-cyan-200/60">{item.description}</p>
+                <h3 className="text-lg font-semibold text-blue-300 mb-2">{item.title}</h3>
+                <p className="text-sm text-blue-200/60">{item.description}</p>
               </div>
             ))}
           </div>
