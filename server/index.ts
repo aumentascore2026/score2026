@@ -18,6 +18,15 @@ async function startServer() {
 
   app.use(express.static(staticPath));
 
+  // Ping endpoint to keep Render awake
+  app.get("/api/ping", (_req, res) => {
+    res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
+  });
+
+  app.head("/api/ping", (_req, res) => {
+    res.status(200).send();
+  });
+
   // Handle client-side routing - serve index.html for all routes
   app.get("*", (_req, res) => {
     res.sendFile(path.join(staticPath, "index.html"));
