@@ -47,25 +47,33 @@ async function startServer() {
 
   server.listen(port, () => {
     console.log(`Server running on http://localhost:${port}/`);
+    console.log(`[CRON] Keep-alive scheduler started (every 1 minute)`);
+  });
 
-    // Schedule self-ping every minute to keep Render awake
-    cron.schedule("*/1 * * * *", async () => {
-      try {
-        const externalUrl = process.env.RENDER_EXTERNAL_URL || `http://localhost:${port}`;
-        const response = await fetch(`${externalUrl}/keep-alive`, {
-          method: "GET",
-        });
-        if (response.ok) {
-          console.log(`[CRON] Self-ping successful at ${new Date().toISOString()}`);
-        } else {
-          console.warn(`[CRON] Self-ping failed with status ${response.status}`);
-        }
-      } catch (error) {
-        console.error(`[CRON] Self-ping error:`, error instanceof Error ? error.message : error);
+  // Schedule self-ping OUTSIDE of listen to ensure it runs even if server sleeps
+  cron.schedule("*/1 * * * *", async () => {
+    try {
+      const externalUrl = process.env.RENDER_EXTERNAL_URL || `http://localhost:${port}`;
+      console.log(`[CRON] Attempting self-ping to ${externalUrl}/keep-alive`);
+      
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 5000);
+      
+      const response = await fetch(`${externalUrl}/keep-alive`, {
+        method: "GET",
+        signal: controller.signal,
+      });
+      
+      clearTimeout(timeout);
+      
+      if (response.ok) {
+        console.log(`[CRON] ✓ Self-ping successful at ${new Date().toISOString()}`);
+      } else {
+        console.warn(`[CRON] ✗ Self-ping failed with status ${response.status}`);
       }
-    });
-
-    console.log("[CRON] Keep-alive scheduler started (every 1 minute)");
+    } catch (error) {
+      console.error(`[CRON] ✗ Self-ping error:`, error instanceof Error ? error.message : String(error));
+    }
   });
 }
 
