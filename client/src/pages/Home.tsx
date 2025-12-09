@@ -29,10 +29,8 @@ export default function Home() {
     { name: 'Beatriz Costa', increase: 700 },
   ];
 
-  // Generate random notifications
+  // Generate random notifications (always active, not just during loading)
   useEffect(() => {
-    if (!isLoading) return;
-
     const notificationInterval = setInterval(() => {
       const randomUser = simulatedNotifications[
         Math.floor(Math.random() * simulatedNotifications.length)
@@ -46,10 +44,10 @@ export default function Home() {
       };
 
       setNotifications((prev) => [...prev, newNotification]);
-    }, 2000);
+    }, 3000);
 
     return () => clearInterval(notificationInterval);
-  }, [isLoading]);
+  }, []);
 
   // Handle CPF input
   const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,29 +79,29 @@ export default function Home() {
     setProgress(0);
     setScore(0);
 
-    // Simulate progress
+    // Simulate progress (slower)
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(progressInterval);
           return 100;
         }
-        return prev + Math.random() * 20;
+        return prev + Math.random() * 10;
       });
-    }, 300);
+    }, 600);
 
-    // Simulate score increase
+    // Simulate score increase (slower)
     const scoreInterval = setInterval(() => {
       setScore((prev) => {
         if (prev >= 850) {
           clearInterval(scoreInterval);
           return 850;
         }
-        return prev + Math.random() * 100;
+        return prev + Math.random() * 50;
       });
-    }, 200);
+    }, 400);
 
-    // Complete simulation after 6 seconds
+    // Complete simulation after 12 seconds (doubled duration)
     setTimeout(() => {
       clearInterval(progressInterval);
       clearInterval(scoreInterval);
@@ -115,7 +113,7 @@ export default function Home() {
       const increase = Math.floor(Math.random() * 400) + 200;
       setScoreIncrease(increase);
       setShowSuccessModal(true);
-    }, 6000);
+    }, 12000);
   };
 
   // Remove notification
@@ -128,7 +126,6 @@ export default function Home() {
     setCpf('');
     setScore(0);
     setProgress(0);
-    setNotifications([]);
     setShowSuccessModal(false);
   };
 
@@ -168,15 +165,18 @@ export default function Home() {
         <div className="w-full max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12 md:mb-16 animate-fade-in-up">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Zap className="w-8 h-8 text-blue-400 glow-cyan" />
-              <h1 className="text-4xl md:text-6xl font-bold font-mono text-white glow-text-cyan">
-                SCORE 2026
-              </h1>
-              <Zap className="w-8 h-8 text-blue-400 glow-cyan" />
+            <div className="flex items-center justify-center mb-6">
+              <img src="/images/logo.png" alt="Aumente seu Score" className="h-32 md:h-40 object-contain" />
             </div>
-            <p className="text-lg md:text-xl text-blue-300/80 font-light">
-              Simulador de Score com Tecnologia Avançada
+            <div className="flex items-center justify-center gap-4 mb-4">
+              <img src="/images/logo.png" alt="" className="h-12 md:h-16 object-contain" />
+              <h1 className="text-3xl md:text-5xl font-bold text-white glow-text-cyan">
+                Aumente seu Score
+              </h1>
+              <img src="/images/logo.png" alt="" className="h-12 md:h-16 object-contain" />
+            </div>
+            <p className="text-base md:text-lg text-blue-300/80 font-light max-w-2xl mx-auto">
+              Aumente ainda hoje o seu score com a maior tecnologia avançada
             </p>
           </div>
 

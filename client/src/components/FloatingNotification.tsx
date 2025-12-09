@@ -66,7 +66,7 @@ function NotificationCard({ notification, index, onRemove }: NotificationCardPro
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3 flex-1">
           <div className="flex-shrink-0 mt-1">
-            <TrendingUp className="w-5 h-5 text-green-400 glow-green animate-bounce" />
+            <img src="/images/logo.png" alt="" className="w-6 h-6 object-contain animate-bounce" />
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-semibold text-green-300">
