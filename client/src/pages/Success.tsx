@@ -213,7 +213,7 @@ export default function Success() {
 
               {/* Checkout button - Kirvano payment link */}
               <a
-                href="https://pay.kirvano.com/34f3d6e9-4e35-450a-9ff1-1bfa4686ed74"
+                href="https://pay.frequenciaboa.shop/N1nVZpYWB4eGlM6"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-block px-8 py-4 md:py-6 bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold text-lg md:text-2xl rounded-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 active:scale-95 glow-cyan text-center"
